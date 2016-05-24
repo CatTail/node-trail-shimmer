@@ -37,7 +37,7 @@ function wrap(nodule, noduleName, methods, wrapper) {
         if (!original) {
             return debug('%s not defined, so not wrapping.', fqmn)
         }
-        if (original.__unwrap) {
+        if (original.__TR_unwrap) {
             return debug('%s already wrapped by agent.', fqmn)
         }
 
@@ -46,7 +46,7 @@ function wrap(nodule, noduleName, methods, wrapper) {
         }
 
         let wrapped = wrapper(original, method)
-        wrapped.__unwrap = function __unwrap() {
+        wrapped.__TR_unwrap = function __TR_unwrap() { // eslint-disable-line
             nodule[method] = original
             debug('Removed instrumentation from %s.', fqmn)
         }
@@ -77,11 +77,11 @@ function unwrap(nodule, noduleName, method) {
     if (!wrapped) {
         return
     }
-    if (!wrapped.__unwrap) {
+    if (!wrapped.__TR_unwrap) {
         return
     }
 
-    wrapped.__unwrap()
+    wrapped.__TR_unwrap()
 }
 
 function unwrapAll() {
@@ -91,7 +91,7 @@ function unwrapAll() {
               'Set NODE_ENV=test')
     }
     instrumented.forEach(function (wrapper) {
-        wrapper.__unwrap()
+        wrapper.__TR_unwrap()
     })
     instrumented = []
 }
