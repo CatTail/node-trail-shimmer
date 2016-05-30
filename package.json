@@ -1,7 +1,7 @@
 {
   "name": "trail-shimmer",
   "description": "",
-  "repository": "CatTail/node-trail-shimmer",
+  "repository": "open-trail/node-trail-shimmer",
   "version": "0.1.1",
   "main": "dist/index.js",
   "keywords": [],
