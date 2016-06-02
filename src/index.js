@@ -41,10 +41,6 @@ function wrap(nodule, noduleName, methods, wrapper) {
             return debug('%s already wrapped by agent.', fqmn)
         }
 
-        if (original.__NR_original) {
-            return debug('%s already wrapped the newrelic agent, so it is wrapped by us as well', fqmn) // eslint-disable-line
-        }
-
         let wrapped = wrapper(original, method)
         wrapped.__TR_unwrap = function __TR_unwrap() { // eslint-disable-line
             nodule[method] = original
